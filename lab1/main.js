@@ -28,8 +28,9 @@ for (let i = 1; i <= 10; i++) {
 //значення статистичної щільності розподілу
 const f = intervals.map(
   ([min, max]) =>
-    sorted_data.filter((el) => el > min && el < max).length / 100 / h
+    sorted_data.filter((el) => el >= min && el <= max).length / 100 / h
 );
+
 //значення ймовірності безвідмовної роботи пристрою на час правої границі інтервалу
 const Parr = f.map((el) => 1 - el * h);
 const d = Parr[0] - y / (Parr[0] - 1);
@@ -46,7 +47,7 @@ const Pres =
     f[5] * (trouble_free_time - intervals[4][1]));
 
 const z = f[5] / Pres;
-console.log("Ймовірність безвідмовної роботи на час 3168 годин:", z);
+console.log("Ймовірність безвідмовної роботи на час 3168 годин:", Pres);
 
 //ймовірність безвідмовної роботи на час 5210 годин
 const P_5210 =
