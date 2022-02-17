@@ -36,31 +36,30 @@ const Parr = f.map((el) => 1 - el * h);
 const d = Parr[0] - y / (Parr[0] - 1);
 const T = h - h * d;
 
-//ймовірність безвідмовної роботи на час 3168 годин
-const Pres =
-  1 -
-  (f[0] * h +
-    f[1] * h +
-    f[2] * h +
-    f[3] * h +
-    f[4] * h +
-    f[5] * (trouble_free_time - intervals[4][1]));
 
-const z = f[5] / Pres;
-console.log("Ймовірність безвідмовної роботи на час 3168 годин:", Pres);
+let count = 0;
+for (let i =0; i <=10; i++){
 
-//ймовірність безвідмовної роботи на час 5210 годин
-const P_5210 =
-  1 -
-  (f[0] * h +
-    f[1] * h +
-    f[2] * h +
-    f[3] * h +
-    f[4] * h +
-    f[5] * h +
-    f[6] * h +
-    f[7] * h +
-    f[8] * h +
-    f[9] * (P - intervals[8][1]));
-console.log("Інтенсивність відмов на час 5210:", f[9] / P_5210);
-//Інтенсивність відмов на час 5210 годин
+    if (trouble_free_time > intervals[i][1] ){
+        count+=f[i]*h
+    } else {
+        let res = 1 - count - f[i]* (trouble_free_time - intervals[i][0])
+        console.log(`Ймовірність безвідмовної роботи на час ${trouble_free_time} годин:`, res);
+        break
+    }
+}
+
+
+let res = 0;
+let count2 = 0
+for (let i =0; i <=10; i++){
+
+    if (P > intervals[i][1] ){
+        count2+=f[i]*h
+    } else {
+        let res = 1 - count2 - f[i]* (P - intervals[i][0])
+        console.log(`Інтенсивність відмов на час ${P}:`, f[i] / res);
+        break
+    }
+}
+
