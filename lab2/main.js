@@ -57,17 +57,24 @@ truthTable.forEach(truthEl => {
     })
 })
 
-resOfTruthElem.forEach(path => {
-    let multiplyQ;
-    path.forEach((el, i) => {
-        if (el === 1) {
-            if (!multiplyQ) {
-                multiplyQ = INIT_P[i]
-            } else {
-                multiplyQ *= INIT_P[i]
+const generateP = (resOfTruthElem, pArr) => {
+    let resP = 0;
+    resOfTruthElem.forEach(path => {
+        let multiplyQ;
+        path.forEach((el, i) => {
+            if (el === 1) {
+                if (!multiplyQ) {
+                    multiplyQ = pArr[i]
+                } else {
+                    multiplyQ *= pArr[i]
+                }
             }
-        }
+        })
+        resP += multiplyQ
     })
-    resP += multiplyQ
-})
-console.log(resP)
+    return resP;
+}
+
+console.log('Ймовірність безвідмовної роботи системи:',generateP(resOfTruthElem, INIT_P))
+module.exports = {generateP, resOfTruthElem,INIT_P}
+
