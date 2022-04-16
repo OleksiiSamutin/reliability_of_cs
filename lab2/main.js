@@ -68,6 +68,12 @@ const generateP = (resOfTruthElem, pArr) => {
                 } else {
                     multiplyQ *= pArr[i]
                 }
+            } else {
+                if (!multiplyQ) {
+                    multiplyQ = 1 - pArr[i]
+                } else {
+                    multiplyQ *= 1 - pArr[i]
+                }
             }
         })
         resP += multiplyQ
